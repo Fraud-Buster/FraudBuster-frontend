@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './FAQSection.css';
 
 const FAQSection = () => {
   const faqData = [
@@ -18,27 +17,37 @@ const FAQSection = () => {
   };
 
   return (
-    <div className="faq-section">
-      <h1 className="faq-heading">Frequently Asked Questions (FAQ)</h1>
-      <h3 className="faq-subheading">
+    <div className="flex flex-col justify-items-center mb-2 mx-auto my-12 text-white text-left">
+      <h1 className="font-inter font-bold text-[36px] text-[#CB122A] text-center">
+        Frequently Asked Questions (FAQ)
+      </h1>
+      <h3 className="font-inter font-normal text-[18px] my-2 mb-8 text-center text-white">
         Find answers to common queries about Fraudbuster.xyz and how to make the most of our services.
       </h3>
-      
-      <div className="faq-content">
+
+      <div className=" mx-auto">
         {faqData.map((faq, index) => (
           <div key={index} className="faq-item">
-            <hr className="faq-line" />
-            <div className="faq-question" onClick={() => toggleFAQ(index)}>
+            <hr className="w-[900px] border border-white" />
+            <div
+              className={`font-inter font-semibold text-[18px] text-white cursor-pointer py-2 transition-colors duration-300 hover:text-[#CB122A] ${
+                activeIndex === index ? 'text-[#CB122A]' : 'text-white'}`}
+              onClick={() => toggleFAQ(index)}
+            >
               {faq.question}
             </div>
             <div
-              className={`faq-answer-container ${activeIndex === index ? 'expanded' : ''}`}
+              className={`overflow-hidden transition-[max-height,opacity] duration-300 ease ${
+                activeIndex === index ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'
+              }`}
             >
-              <div className="faq-answer">{faq.answer}</div>
+              <div className="font-inter text-[16px] font-normal text-white py-2 mb-2">
+                {faq.answer}
+              </div>
             </div>
           </div>
         ))}
-        <hr className="faq-line" />
+        <hr className="w-[900px] border border-white" />
       </div>
     </div>
   );

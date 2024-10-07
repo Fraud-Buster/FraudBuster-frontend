@@ -1,8 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Heading from './components/Heading';
-import Search from './components/Search';
-import ReportButton from './components/ReportButton';
 import InsightsSection from './components/InsightsSection'; // Import the new section
 import './App.css';
 import BlogSection from './components/BlogSection'; // Adjust the path if necessary
@@ -14,8 +12,6 @@ function App() {
     <div className="App">
       <Navbar />
       <Heading />
-      <Search />
-      <ReportButton />
       <InsightsSection />
       <BlogSection />
       <FAQSection />
