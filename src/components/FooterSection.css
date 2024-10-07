@@ -1,0 +1,91 @@
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Allow children to take full width */
+    background: #CB122A; /* Background color for the footer info */
+    margin: 0px 20px;
+}
+
+.footer-info {
+    display: flex; /* Enable flexbox for the footer info */
+    width: 100%; /* Make the footer info full width */
+    justify-content: space-between; /* Space between the footer sections */
+    gap: 90px; /* Gap between each footer section */
+    margin: 0px 80px;
+}
+
+.footer-part {
+    flex: 1; /* Equal space for each part */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+.footer-logo-image {
+    width: 400px; /* Logo width */
+    height: 100px; /* Logo height */
+}
+
+.footer-description {
+    width: 380px; /* Paragraph width */
+    height: 75px; /* Paragraph height */
+    color: #FFF; /* Text color */
+    margin-top: 10px; /* Space between logo and paragraph */
+    text-align: left; /* Align text to the left */
+}
+
+
+.quick-links {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.quick-links li {
+    margin-bottom: 5px; /* Space between links */
+}
+
+.quick-links a {
+    color: #FFF; /* Link color */
+    text-decoration: none; /* Remove underline */
+    
+}
+
+.quick-links a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.contact-email {
+    display: flex; /* Flexbox for email and icon */
+    align-items: center; /* Center align */
+    color: #FFF; /* Text color */
+}
+
+.email-icon {
+    margin-right: 5px; /* Space between icon and email */
+}
+
+.social-links {
+    display: flex; /* Flexbox for social links */
+    gap: 15px; /* Space between social icons */
+}
+
+.social-icon {
+    color: #FFF; /* Icon color */
+    font-size: 24px; /* Icon size */
+}
+
+.footer-subfooter {
+    display: flex; /* Flexbox for the sub-footer */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align items */
+    background: #0A0A0B; /* Background color for the sub-footer */
+    color: #FFF; /* Text color */
+    width: 100%; /* Make the sub-footer full width */
+    padding: 16px 0; /* Adjust padding as needed */
+}
