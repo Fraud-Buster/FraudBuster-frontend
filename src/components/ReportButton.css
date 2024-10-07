@@ -1,0 +1,19 @@
+/* Styles for the Report Button */
+.report-button {
+    width: 246px;  /* Width for the button */
+    height: 45px;  /* Height for the button */
+    background-color: #CB122A;  /* Background color */
+    color: white;  /* Text color */
+    font-size: 24px;  /* Text size */
+    border: none;  /* Remove border */
+    border-radius: 14px;  /* Rounded corners */
+    cursor: pointer;  /* Pointer cursor on hover */
+    display: block;  /* Display block to position the button */
+    margin: 20px auto;  /* Center the button with margin */
+    text-align: center;  /* Center the text */
+  }
+  
+  .report-button:hover {
+    background-color: #C00;  /* Darken the button color on hover */
+  }
+  

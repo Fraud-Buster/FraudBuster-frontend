@@ -1,0 +1,49 @@
+/* Styles for the Navbar */
+.navbar {
+    width: 1057px;
+    height: 35px;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  /* Center items vertically */
+    background: #CB122A;
+    border-radius: 14px;
+    margin: 20px auto;  /* Center the entire navbar horizontally */
+    gap: 40px;
+    flex-shrink: 0;
+}
+  
+/* Styling the logo */
+.navbar-logo img {
+    margin-top: 2px;
+    width: 155px;
+    height: 40px;
+    flex-shrink: 0;
+}
+  
+/* Styling the navigation links */
+.navbar-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
+    /* Consider removing width and height for fluidity */
+}
+  
+.navbar-links a:hover {
+    text-decoration: underline;
+    color: #FFD700;  /* Example hover color change */
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;  /* Stack items vertically on small screens */
+        width: 100%;  /* Full width on small screens */
+    }
+    .navbar-links {
+        margin-top: 10px;  /* Adds space above links */
+    }
+}

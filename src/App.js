@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import React from 'react';
+import Navbar from './components/Navbar';
+import Heading from './components/Heading';
+import Search from './components/Search';
+import ReportButton from './components/ReportButton';
+import InsightsSection from './components/InsightsSection'; // Import the new section
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Heading />
+      <Search />
+      <ReportButton />
+      <InsightsSection />  {/* Add the Insights section below the button */}
     </div>
   );
 }
