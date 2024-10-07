@@ -2,7 +2,7 @@
 .report-button {
     width: 246px;  /* Width for the button */
     height: 45px;  /* Height for the button */
-    background-color: #CB122A;  /* Background color */
+    background-color: gray;  /* Background color */
     color: white;  /* Text color */
     font-size: 24px;  /* Text size */
     border: none;  /* Remove border */
@@ -11,9 +11,11 @@
     display: block;  /* Display block to position the button */
     margin: 20px auto;  /* Center the button with margin */
     text-align: center;  /* Center the text */
+    transition: all 0.4s;
   }
   
   .report-button:hover {
-    background-color: #C00;  /* Darken the button color on hover */
+    background-color: rgb(64, 64, 64);  /* Darken the button color on hover */  
+    transform: scale(0.99);
   }
   
