@@ -1,22 +1,22 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Heading from './components/Heading';
-import InsightsSection from './components/InsightsSection'; // Import the new section
-import './App.css';
+import SRsection from './components/SRsection';
+import InsightsSection from './components/InsightsSection'; // Import the Insights Section
 import BlogSection from './components/BlogSection'; // Adjust the path if necessary
 import FAQSection from './components/FAQSection';
 import FooterSection from './components/FooterSection';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: '#181818' }}> {/* Set background color inline */}
       <Navbar />
       <Heading />
+      <SRsection />
       <InsightsSection />
       <BlogSection />
       <FAQSection />
-       {/* Add the blog section here */}
-      {/* Other components go here */}
+      <BlogSection />
       <FooterSection />
     </div>
   );
