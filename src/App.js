@@ -7,19 +7,21 @@ import BlogSection from './components/BlogSection'; // Adjust the path if necess
 import FAQSection from './components/FAQSection';
 import FooterSection from './components/FooterSection';
 
+
 function App() {
   return (
-    <div className="App" style={{ backgroundColor: '#181818' }}> {/* Set background color inline */}
+    <div className="App" style={{ backgroundColor: '#0A0A0A' }}> {/* Set background color inline */}
       <Navbar />
       <Heading />
       <SRsection />
       <InsightsSection />
       <BlogSection />
       <FAQSection />
-      <BlogSection />
       <FooterSection />
     </div>
   );
 }
 
 export default App;
+
+

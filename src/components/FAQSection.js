@@ -17,18 +17,18 @@ const FAQSection = () => {
   };
 
   return (
-    <div className="flex flex-col justify-items-center mb-2 mx-auto my-12 text-white text-left">
-      <h1 className="font-inter font-bold text-[36px] text-[#CB122A] text-center">
+    <div className="flex flex-col items-center justify-center mb-8 mx-auto my-12 text-white text-left p-6">
+      <h1 className="font-inter font-bold text-[36px] text-white text-center">
         Frequently Asked Questions (FAQ)
       </h1>
       <h3 className="font-inter font-normal text-[18px] my-2 mb-8 text-center text-white">
         Find answers to common queries about Fraudbuster.xyz and how to make the most of our services.
       </h3>
 
-      <div className=" mx-auto">
+      <div className="w-full max-w-screen-md mx-auto">
         {faqData.map((faq, index) => (
           <div key={index} className="faq-item">
-            <hr className="w-[900px] border border-white" />
+            <hr className="w-full border border-white" />
             <div
               className={`font-inter font-semibold text-[18px] text-white cursor-pointer py-2 transition-colors duration-300 hover:text-[#CB122A] ${
                 activeIndex === index ? 'text-[#CB122A]' : 'text-white'}`}
@@ -37,8 +37,8 @@ const FAQSection = () => {
               {faq.question}
             </div>
             <div
-              className={`overflow-hidden transition-[max-height,opacity] duration-300 ease ${
-                activeIndex === index ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                activeIndex === index ? 'h-auto translate-y-0 opacity-100' : 'h-0 translate-y-[-20px] opacity-0'
               }`}
             >
               <div className="font-inter text-[16px] font-normal text-white py-2 mb-2">
@@ -47,7 +47,7 @@ const FAQSection = () => {
             </div>
           </div>
         ))}
-        <hr className="w-[900px] border border-white" />
+        <hr className="w-full border border-white" />
       </div>
     </div>
   );
