@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo.png'; // Ensure the logo image is in the correct path
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   // State to manage rounded corners
@@ -30,21 +31,21 @@ function Navbar() {
 
       {/* Navigation Links (transparent) */}
       <div className="flex space-x-5">
-        <a href="/" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="Home">
+        <Link to="/" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="Home">
           Home
-        </a>
-        <a href="/about" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="About">
+        </Link>
+        <Link to="/about" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="About">
           About
-        </a>
-        <a href="/blogs" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="Blogs">
+        </Link>
+        <Link to="/blogs" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="Blogs">
           Blogs
-        </a>
-        <a href="/contact" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="Contact">
+        </Link>
+        <Link to="/contact" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="Contact">
           Contact
-        </a>
-        <a href="/api" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="API">
+        </Link>
+        <Link to="/api" className="text-gray-400 text-lg font-medium hover:text-white hover:scale-110 transform transition duration-300 ease-out" aria-label="API">
           API
-        </a>
+        </Link>
       </div>
     </nav>
   );
