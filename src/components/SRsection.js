@@ -26,7 +26,7 @@ const SRsection = () => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="w-11/12 max-w-5xl rounded-lg overflow-hidden" style={{ backgroundColor: '#181818' }}>
+      <div className="w-11/12 max-w-5xl rounded-lg overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
       <header>
   <div className="flex justify-center mb-4 mt-10"> {/* Add top margin here */}
     <button
