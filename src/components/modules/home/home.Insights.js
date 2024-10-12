@@ -1,52 +1,47 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const InsightsSection = () => {
-  const [isHeadingVisible, setIsHeadingVisible] = useState(false);
-  const [areParagraphsVisible, setAreParagraphsVisible] = useState(false);
-  
+  const [visibility, setVisibility] = useState({
+    heading: false,
+    paragraphs: false,
+  });
+
   const headingRef = useRef(null);
   const paragraphsRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Update visibility based on intersection
-        if (entry.target === headingRef.current) {
-          setIsHeadingVisible(entry.isIntersecting);
-        } else if (entry.target === paragraphsRef.current) {
-          setAreParagraphsVisible(entry.isIntersecting);
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === headingRef.current) {
+            setVisibility((prev) => ({ ...prev, heading: entry.isIntersecting }));
+          } else if (entry.target === paragraphsRef.current) {
+            setVisibility((prev) => ({ ...prev, paragraphs: entry.isIntersecting }));
+          }
+        });
       },
       {
-        threshold: 0.1, // Adjust threshold as needed
+        threshold: 0.1, // Adjust threshold for when to trigger
       }
     );
 
-    // Start observing the elements
-    if (headingRef.current) {
-      observer.observe(headingRef.current);
-    }
-    if (paragraphsRef.current) {
-      observer.observe(paragraphsRef.current);
-    }
+    // Observe elements
+    if (headingRef.current) observer.observe(headingRef.current);
+    if (paragraphsRef.current) observer.observe(paragraphsRef.current);
 
-    // Cleanup the observer on component unmount
+    // Cleanup observer on unmount
     return () => {
-      if (headingRef.current) {
-        observer.unobserve(headingRef.current);
-      }
-      if (paragraphsRef.current) {
-        observer.unobserve(paragraphsRef.current);
-      }
+      if (headingRef.current) observer.unobserve(headingRef.current);
+      if (paragraphsRef.current) observer.unobserve(paragraphsRef.current);
     };
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center w-full md:w-[980px] mx-auto my-10 p-5 mt-40"> {/* Added mt-10 for 40px top margin */}
+    <div className="flex flex-col md:flex-row justify-between items-center w-full md:w-[980px] mx-auto my-10 p-5 "> {/* Adjust layout */}
       {/* Left side: Paragraphs */}
       <div
         ref={paragraphsRef}
-        className={`text-white font-inter text-lg leading-[1.5] w-full md:w-[500px] text-left transition-transform duration-500 ${areParagraphsVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        className={`text-white font-inter text-lg leading-[1.5] w-full md:w-[500px] text-left transition-transform duration-500 ${visibility.paragraphs ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
       >
         {/* "How to Search?" Section */}
         <div className="mt-5">
@@ -69,7 +64,7 @@ const InsightsSection = () => {
       {/* Right side: Heading with animation */}
       <div
         ref={headingRef}
-        className={`text-white font-inter text-lg leading-[1.2] w-full md:w-[350px] text-center md:text-right mb-8 md:mb-0 transition-transform duration-500 ${isHeadingVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        className={`text-white font-inter text-lg leading-[1.2] w-full md:w-[350px] text-center md:text-right mb-8 md:mb-0 transition-transform duration-500 ${visibility.heading ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
       >
         <h2 className="text-4xl font-bold">
           Get Insights into Every <span className="text-[#CB122A]">Scam</span><br />

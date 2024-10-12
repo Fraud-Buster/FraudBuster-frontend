@@ -1,12 +1,10 @@
 /* src/App.css */
+:root {
+  background-color: '#0A0A0A'
+}
 .App {
   text-align: center;
   padding: 20px;
+  background-color: '#0A0A0A'
 }
 
-body {
-  background-color: #181818;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white; /* Optional: Set default text color to white for better contrast */
-}

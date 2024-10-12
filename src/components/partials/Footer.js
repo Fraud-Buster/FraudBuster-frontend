@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo.png'; // Adjust the path based on your project structure
+import logo from '../../assets/logo.png'; // Adjust the path based on your project structure
 import { FaEnvelope, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa'; // Importing icons
 
 const Footer = () => {
