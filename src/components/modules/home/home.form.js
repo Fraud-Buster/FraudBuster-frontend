@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SRsection = () => {
+const HomeForm = () => {
   const [isReportVisible, setIsReportVisible] = useState(false); // Default to showing Check for Suspicious Details
   const [scamType, setScamType] = useState("");
   const [checkType, setCheckType] = useState("");
@@ -198,7 +198,7 @@ const SRsection = () => {
                       name="checkType"
                       value={checkType}
                       onChange={(e) => setCheckType(e.target.value)}
-                      className="w-full p-2 bg-gray-700 rounded text-white"
+                      className="w-full p-2 bg-gray-700 rounded text-white h-15vh"
                       required
                     >
                       <option value="" disabled>Select an option</option>
@@ -280,7 +280,7 @@ const SRsection = () => {
                         type="text"
                         id="checkDetail"
                         name="checkDetail"
-                        className="w-full p-2 bg-gray-700 rounded text-white"
+                        className="w-full p-2 bg-gray-700 rounded-lg text-white text-start text-2xl h-[20vh]"
                         placeholder="Enter the detail (e.g., phone number, eSewa ID, etc.)"
                         required
                       />
@@ -303,4 +303,4 @@ const SRsection = () => {
   );
 };
 
-export default SRsection;
+export default HomeForm;

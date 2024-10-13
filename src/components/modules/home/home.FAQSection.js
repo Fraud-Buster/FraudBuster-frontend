@@ -17,11 +17,11 @@ const FAQSection = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mb-8 mx-auto my-12 text-white text-left p-6">
-      <h1 className="font-inter font-bold text-[36px] text-white text-center">
+    <div className="h-[100vh] w-[100vw] flex flex-col items-center justify-center mb-8  my-12 text-white text-left p-6">
+      <h1 className="font-inter font-bold text-4xl text-white text-center">
         Frequently Asked Questions (FAQ)
       </h1>
-      <h3 className="font-inter font-normal text-[18px] my-2 mb-8 text-center text-white">
+      <h3 className="font-inter font-normal text-2xl my-2 mb-8 text-center text-white">
         Find answers to common queries about Fraudbuster.xyz and how to make the most of our services.
       </h3>
 
@@ -30,7 +30,7 @@ const FAQSection = () => {
           <div key={index} className="faq-item">
             <hr className="w-full border border-white" />
             <div
-              className={`font-inter font-semibold text-[18px] text-white cursor-pointer py-2 transition-colors duration-300 hover:text-[#CB122A] ${
+              className={`font-inter font-semibold text-2xl text-white cursor-pointer py-2 transition-colors duration-300 hover:text-[#CB122A] ${
                 activeIndex === index ? 'text-[#CB122A]' : 'text-white'}`}
               onClick={() => toggleFAQ(index)}
             >
@@ -41,7 +41,7 @@ const FAQSection = () => {
                 activeIndex === index ? 'h-auto translate-y-0 opacity-100' : 'h-0 translate-y-[-20px] opacity-0'
               }`}
             >
-              <div className="font-inter text-[16px] font-normal text-white py-2 mb-2">
+              <div className="font-inter text-xl font-normal text-white py-2 mb-2">
                 {faq.answer}
               </div>
             </div>
