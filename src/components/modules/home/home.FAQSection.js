@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const FAQSection = () => {
   const faqData = [
@@ -11,13 +11,37 @@ const FAQSection = () => {
   ];
 
   const [activeIndex, setActiveIndex] = useState(null);
+  const [scale, setScale] = useState(1);
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  // Scaling effect based on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const scaleValue = scrollY / 2100; // Adjust 2000 for a more/less dramatic effect
+      if (scaleValue >=1)
+        {
+        setScale(1)
+        }
+        else
+       setScale(scaleValue);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="h-[100vh] w-[100vw] flex flex-col items-center justify-center mb-8  my-12 text-white text-left p-6">
+    <div
+      className="flex flex-col items-center justify-center mb-8 my-12 text-white text-left p-6"
+      style={{ 
+        height: '100vh',   // Full height of the viewport for centering
+        width: '100vw'     // Full width of the viewport for centering
+      }} 
+    >
       <h1 className="font-inter font-bold text-4xl text-white text-center">
         Frequently Asked Questions (FAQ)
       </h1>
@@ -25,7 +49,10 @@ const FAQSection = () => {
         Find answers to common queries about Fraudbuster.xyz and how to make the most of our services.
       </h3>
 
-      <div className="w-full max-w-screen-md mx-auto">
+      <div className="w-full max-w-screen-md mx-auto"
+        style={{
+                  transform: `scale(${scale})`, 
+        }}>
         {faqData.map((faq, index) => (
           <div key={index} className="faq-item">
             <hr className="w-full border border-white" />
@@ -33,6 +60,8 @@ const FAQSection = () => {
               className={`font-inter font-semibold text-2xl text-white cursor-pointer py-2 transition-colors duration-300 hover:text-[#CB122A] ${
                 activeIndex === index ? 'text-[#CB122A]' : 'text-white'}`}
               onClick={() => toggleFAQ(index)}
+              aria-expanded={activeIndex === index} // Accessibility improvement
+              role="button"
             >
               {faq.question}
             </div>
