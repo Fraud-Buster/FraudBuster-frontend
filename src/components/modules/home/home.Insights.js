@@ -1,22 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// Card Component for Steps with Arrows
 const StepCard = ({ title, isLast, isVisible }) => (
   <div className={`flex items-center justify-center space-x-4 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-    {/* Card */}
     <div className="bg-transparent border border-[#CB122A] p-5 rounded-lg shadow-lg text-left w-full md:w-[200px] lg:w-[250px] flex-shrink-0 hover:bg-[#CB122A] hover:bg-opacity-10 transform hover:scale-105 transition-all duration-300">
       <h4 className="text-xl font-extrabold text-[#CB122A] mb-2 text-center">{title}</h4>
     </div>
-
-    {/* Arrow icon if not the last card */}
     {!isLast && (
       <div className="w-6 h-6 lg:w-8 lg:h-8 text-[#CB122A] transform hover:scale-110 transition-all duration-300">
-        <svg
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </div>
@@ -24,13 +15,11 @@ const StepCard = ({ title, isLast, isVisible }) => (
   </div>
 );
 
-// Component for Search Instructions with Sequential Reveal
 const SearchInstructions = React.forwardRef((props, ref) => {
   const [visibleSteps, setVisibleSteps] = useState([false, false, false]);
 
   useEffect(() => {
     if (props.visibility) {
-      // Reveal the steps one by one with a delay
       visibleSteps.forEach((_, index) => {
         setTimeout(() => {
           setVisibleSteps((prev) => {
@@ -38,10 +27,10 @@ const SearchInstructions = React.forwardRef((props, ref) => {
             newVisibility[index] = true;
             return newVisibility;
           });
-        }, index * 500); // 500ms delay between each step
+        }, index * 500);
       });
     }
-  }, [props.visibility]);
+  }, [props.visibility, visibleSteps]);
 
   return (
     <div
@@ -50,7 +39,6 @@ const SearchInstructions = React.forwardRef((props, ref) => {
       aria-label="How to Search Section"
     >
       <h3 className="text-2xl font-bold mb-5">How to Search?</h3>
-      {/* Horizontal Step Cards */}
       <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-8">
         <StepCard title="Select Your Wallet" isVisible={visibleSteps[0]} />
         <StepCard title="Enter the Details" isVisible={visibleSteps[1]} />
@@ -60,7 +48,6 @@ const SearchInstructions = React.forwardRef((props, ref) => {
   );
 });
 
-// Component for Insights Heading
 const InsightsHeading = React.forwardRef((props, ref) => (
   <div
     ref={ref}
@@ -73,7 +60,6 @@ const InsightsHeading = React.forwardRef((props, ref) => (
   </div>
 ));
 
-// Main Component
 const InsightsSection = () => {
   const [visibility, setVisibility] = useState({
     heading: false,
@@ -84,12 +70,15 @@ const InsightsSection = () => {
   const paragraphsRef = useRef(null);
 
   useEffect(() => {
+    const currentHeadingRef = headingRef.current;
+    const currentParagraphsRef = paragraphsRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.target === headingRef.current) {
+          if (entry.target === currentHeadingRef) {
             setVisibility((prev) => ({ ...prev, heading: entry.isIntersecting }));
-          } else if (entry.target === paragraphsRef.current) {
+          } else if (entry.target === currentParagraphsRef) {
             setVisibility((prev) => ({ ...prev, paragraphs: entry.isIntersecting }));
           }
         });
@@ -99,23 +88,18 @@ const InsightsSection = () => {
       }
     );
 
-    // Observe elements
-    if (headingRef.current) observer.observe(headingRef.current);
-    if (paragraphsRef.current) observer.observe(paragraphsRef.current);
+    if (currentHeadingRef) observer.observe(currentHeadingRef);
+    if (currentParagraphsRef) observer.observe(currentParagraphsRef);
 
-    // Cleanup observer on unmount
     return () => {
-      if (headingRef.current) observer.unobserve(headingRef.current);
-      if (paragraphsRef.current) observer.unobserve(paragraphsRef.current);
+      if (currentHeadingRef) observer.unobserve(currentHeadingRef);
+      if (currentParagraphsRef) observer.unobserve(currentParagraphsRef);
     };
   }, []);
 
   return (
     <div className="flex flex-col justify-center items-center w-full md:w-[1200px] mx-auto my-10 p-5">
-      {/* Right side: Insights Heading */}
       <InsightsHeading ref={headingRef} visibility={visibility.heading} />
-      
-      {/* Left side: Search Instructions */}
       <SearchInstructions ref={paragraphsRef} visibility={visibility.paragraphs} />
     </div>
   );

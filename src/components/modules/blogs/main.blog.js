@@ -69,9 +69,6 @@ const Blog = () => {
                 </svg>
                 By {post.author} on {post.date}
               </p>
-              <a href="#" className="text-[#CB122A] hover:underline font-bold">
-                Read More
-              </a>
             </div>
           ))}
         </div>
