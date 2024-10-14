@@ -1,17 +1,29 @@
 import { useState } from "react";
 
 const HomeForm = () => {
-  const [isReportVisible, setIsReportVisible] = useState(false); // Default to showing Check for Suspicious Details
-  const [scamType, setScamType] = useState("");
-  const [checkType, setCheckType] = useState("");
-  const [accountName, setAccountName] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
-  const [bankName, setBankName] = useState("");
-  const [facebookName, setFacebookName] = useState("");
-  const [facebookUrl, setFacebookUrl] = useState("");
+  const [isReportVisible, setIsReportVisible] = useState(false);
+  const [scamType, setScamType] = useState("esewa");
+  const [details, setDetails] = useState({
+    accountName: "",
+    accountNumber: "",
+    bankName: "",
+    facebookName: "",
+    facebookUrl: "",
+    scamDetail: "",
+    esewaDetail: "",
+    telegramUsername: "",
+    whatsappNumber: "",
+  });
+  const [checkType, setCheckType] = useState("esewa"); // Default value set to eSewa ID
 
-  const toggleSection = () => {
-    setIsReportVisible(!isReportVisible);
+  const toggleSection = () => setIsReportVisible(!isReportVisible);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
   };
 
   const handleReportSubmit = (e) => {
@@ -24,42 +36,210 @@ const HomeForm = () => {
     alert("Check submitted!");
   };
 
+  const renderFormInputs = () => {
+    switch (scamType) {
+      case "banking":
+        return (
+          <>
+            <InputField
+              label="Account Name"
+              name="accountName"
+              value={details.accountName}
+              onChange={handleChange}
+              placeholder="Enter your account name"
+            />
+            <InputField
+              label="Account Number"
+              name="accountNumber"
+              value={details.accountNumber}
+              onChange={handleChange}
+              placeholder="Enter your account number"
+            />
+            <InputField
+              label="Bank Name"
+              name="bankName"
+              value={details.bankName}
+              onChange={handleChange}
+              placeholder="Enter your bank name"
+            />
+          </>
+        );
+      case "facebook":
+        return (
+          <>
+            <InputField
+              label="Facebook Name"
+              name="facebookName"
+              value={details.facebookName}
+              onChange={handleChange}
+              placeholder="Enter the name on Facebook"
+            />
+            <InputField
+              label="Facebook Profile URL"
+              name="facebookUrl"
+              value={details.facebookUrl}
+              onChange={handleChange}
+              type="url"
+              placeholder="Enter your Facebook profile URL"
+            />
+          </>
+        );
+      case "phone":
+      case "esewa":
+      case "telegram":
+      case "whatsapp":
+        return (
+          <InputField
+            label={`Enter ${scamType.charAt(0).toUpperCase() + scamType.slice(1)} Details`}
+            name={scamType === "esewa" ? "esewaDetail" : scamType === "whatsapp" ? "whatsappNumber" : "scamDetail"}
+            value={details[scamType === "esewa" ? "esewaDetail" : scamType === "whatsapp" ? "whatsappNumber" : "scamDetail"]}
+            onChange={handleChange}
+            placeholder={`Enter ${scamType.charAt(0).toUpperCase() + scamType.slice(1)} details`}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderCheckFormInputs = () => {
+    switch (checkType) {
+      case "banking":
+        return (
+          <>
+            <InputField
+              label="Account Name"
+              name="accountName"
+              value={details.accountName}
+              onChange={handleChange}
+              placeholder="Enter your account name"
+            />
+            <InputField
+              label="Account Number"
+              name="accountNumber"
+              value={details.accountNumber}
+              onChange={handleChange}
+              placeholder="Enter your account number"
+            />
+            <InputField
+              label="Bank Name"
+              name="bankName"
+              value={details.bankName}
+              onChange={handleChange}
+              placeholder="Enter your bank name"
+            />
+          </>
+        );
+      case "phone":
+        return (
+          <InputField
+            label="Phone Number"
+            name="phoneNumber"
+            value={details.whatsappNumber} // Assuming you're checking phone numbers here
+            onChange={handleChange}
+            placeholder="Enter the phone number"
+          />
+        );
+      case "esewa":
+        return (
+          <InputField
+            label="eSewa ID"
+            name="esewaDetail"
+            value={details.esewaDetail}
+            onChange={handleChange}
+            placeholder="Enter your eSewa ID"
+          />
+        );
+      case "telegram":
+        return (
+          <InputField
+            label="Telegram Username"
+            name="telegramUsername"
+            value={details.telegramUsername}
+            onChange={handleChange}
+            placeholder="Enter your Telegram username"
+          />
+        );
+      case "whatsapp":
+        return (
+          <InputField
+            label="WhatsApp Number"
+            name="whatsappNumber"
+            value={details.whatsappNumber}
+            onChange={handleChange}
+            placeholder="Enter your WhatsApp number"
+          />
+        );
+      case "facebook":
+        return (
+          <>
+            <InputField
+              label="Facebook Name"
+              name="facebookName"
+              value={details.facebookName}
+              onChange={handleChange}
+              placeholder="Enter the name on Facebook"
+            />
+            <InputField
+              label="Facebook Profile URL"
+              name="facebookUrl"
+              value={details.facebookUrl}
+              onChange={handleChange}
+              type="url"
+              placeholder="Enter your Facebook profile URL"
+            />
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="flex justify-center w-full">
       <div className="w-11/12 max-w-5xl rounded-lg overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-      <header>
-  <div className="flex justify-center mb-4 mt-10"> {/* Add top margin here */}
-    <button
-      onClick={toggleSection}
-      className="text-lg px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition-transform transform duration-300 ease-in-out hover:scale-105 text-white"
-    >
-      {isReportVisible ? "Switch to Check for Scams" : "Switch to Report a Scam"}
-    </button>
-  </div>
-</header>
-
+        <header>
+          <div className="flex justify-center mb-4 mt-10">
+            <button
+              onClick={toggleSection}
+              className="text-lg px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition-transform transform duration-300 ease-in-out hover:scale-105 text-white"
+            >
+              {isReportVisible ? "Switch to Check for Scams" : "Switch to Report a Scam"}
+            </button>
+          </div>
+        </header>
 
         <div className="flex flex-wrap justify-between">
           <div className="flex-1 mr-5 text-white">
             {isReportVisible ? (
               <section>
                 <h2 className="text-xl font-semibold mb-4">Report a Scam</h2>
-                <form id="scamReportForm" encType="multipart/form-data" onSubmit={handleReportSubmit}>
+                <form id="scamReportForm" onSubmit={handleReportSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="scamType" className="block mb-1">
-                      Select Fraud Type:
-                    </label>
+                    <label htmlFor="scamType" className="block mb-1">Select Fraud Type:</label>
                     <select
                       id="scamType"
                       name="scamType"
                       value={scamType}
-                      onChange={(e) => setScamType(e.target.value)}
+                      onChange={(e) => {
+                        setScamType(e.target.value);
+                        setDetails({ // Reset details when type changes
+                          accountName: "",
+                          accountNumber: "",
+                          bankName: "",
+                          facebookName: "",
+                          facebookUrl: "",
+                          scamDetail: "",
+                          esewaDetail: "",
+                          telegramUsername: "",
+                          whatsappNumber: "",
+                        });
+                      }}
                       className="w-full p-2 bg-gray-700 rounded text-white"
                       required
                     >
-                      <option value="" disabled>Select an option</option>
-                      <option value="phone">Phone Number</option>
                       <option value="esewa">eSewa ID</option>
+                      <option value="phone">Phone Number</option>
                       <option value="banking">Banking Details</option>
                       <option value="telegram">Telegram</option>
                       <option value="whatsapp">WhatsApp</option>
@@ -67,121 +247,22 @@ const HomeForm = () => {
                     </select>
                   </div>
 
-                  {scamType === "banking" && (
-                    <>
-                      <div className="mb-4">
-                        <label htmlFor="accountName" className="block mb-1">Account Name:</label>
-                        <input
-                          type="text"
-                          id="accountName"
-                          name="accountName"
-                          value={accountName}
-                          onChange={(e) => setAccountName(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter account name"
-                          required
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label htmlFor="accountNumber" className="block mb-1">Account Number:</label>
-                        <input
-                          type="text"
-                          id="accountNumber"
-                          name="accountNumber"
-                          value={accountNumber}
-                          onChange={(e) => setAccountNumber(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter account number"
-                          required
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label htmlFor="bankName" className="block mb-1">Bank Name:</label>
-                        <input
-                          type="text"
-                          id="bankName"
-                          name="bankName"
-                          value={bankName}
-                          onChange={(e) => setBankName(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter bank name"
-                          required
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  {scamType === "facebook" && (
-                    <>
-                      <div className="mb-4">
-                        <label htmlFor="reportFacebookName" className="block mb-1">Facebook Name:</label>
-                        <input
-                          type="text"
-                          id="reportFacebookName"
-                          name="facebookName"
-                          value={facebookName}
-                          onChange={(e) => setFacebookName(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter Facebook name"
-                          required
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label htmlFor="reportFacebookUrl" className="block mb-1">Facebook Profile URL:</label>
-                        <input
-                          type="url"
-                          id="reportFacebookUrl"
-                          name="facebookUrl"
-                          value={facebookUrl}
-                          onChange={(e) => setFacebookUrl(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter Facebook profile URL"
-                          required
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  {scamType !== "banking" && scamType !== "facebook" && (
-                    <div className="mb-4">
-                      <label htmlFor="scamDetail" className="block mb-1">Enter Details:</label>
-                      <input
-                        type="text"
-                        id="scamDetail"
-                        name="scamDetail"
-                        className="w-full p-2 bg-gray-700 rounded text-white"
-                        placeholder="Enter the scam detail (e.g., phone number, eSewa ID, etc.)"
-                        required
-                      />
-                    </div>
-                  )}
+                  {renderFormInputs()}
 
                   <div className="mb-4">
-                    <label htmlFor="description" className="block mb-1">Description (Max 500 characters):</label>
-                    <textarea
-                      id="description"
-                      name="description"
-                      maxLength="500"
-                      className="w-full p-2 bg-gray-700 rounded text-white"
-                      placeholder="Provide a brief description of the scam..."
-                      required
-                    ></textarea>
-                  </div>
-
-                  <div className="mb-4">
-                    <label htmlFor="scamImage" className="block mb-1">Upload a Photo (Optional):</label>
+                    <label htmlFor="scamImage" className="block mb-1">Upload Scam Image:</label>
                     <input
                       type="file"
                       id="scamImage"
                       name="scamImage"
-                      accept=".jpg, .jpeg"
-                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-gray-600 file:text-white hover:file:bg-gray-500"
+                      accept="image/*"
+                      className="w-full p-2 bg-gray-700 rounded text-white"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="mt-4 px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition duration-300 text-white"
+                    className="mt-4 px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition-transform transform duration-300 ease-in-out hover:scale-105 text-white"
                   >
                     Submit Report
                   </button>
@@ -189,21 +270,33 @@ const HomeForm = () => {
               </section>
             ) : (
               <section>
-                <h2 className="text-xl font-semibold mb-4">Check for Suspicious Details</h2>
-                <form id="checkReportForm" onSubmit={handleCheckSubmit}>
+                <h2 className="text-xl font-semibold mb-4">Check for Scams</h2>
+                <form id="checkScamForm" onSubmit={handleCheckSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="checkType" className="block mb-1">Select Detail Type:</label>
+                    <label htmlFor="checkType" className="block mb-1">Select Check Type:</label>
                     <select
                       id="checkType"
                       name="checkType"
                       value={checkType}
-                      onChange={(e) => setCheckType(e.target.value)}
-                      className="w-full p-2 bg-gray-700 rounded text-white h-15vh"
+                      onChange={(e) => {
+                        setCheckType(e.target.value);
+                        setDetails({ // Reset details when type changes
+                          accountName: "",
+                          accountNumber: "",
+                          bankName: "",
+                          facebookName: "",
+                          facebookUrl: "",
+                          scamDetail: "",
+                          esewaDetail: "",
+                          telegramUsername: "",
+                          whatsappNumber: "",
+                        });
+                      }}
+                      className="w-full p-2 bg-gray-700 rounded text-white"
                       required
                     >
-                      <option value="" disabled>Select an option</option>
-                      <option value="phone">Phone Number</option>
                       <option value="esewa">eSewa ID</option>
+                      <option value="phone">Phone Number</option>
                       <option value="banking">Banking Details</option>
                       <option value="telegram">Telegram</option>
                       <option value="whatsapp">WhatsApp</option>
@@ -211,87 +304,13 @@ const HomeForm = () => {
                     </select>
                   </div>
 
-                  {checkType === "banking" && (
-                    <>
-                      <div className="mb-4">
-                        <label htmlFor="accountName" className="block mb-1">Account Name:</label>
-                        <input
-                          type="text"
-                          id="checkAccountName"
-                          name="checkAccountName"
-                          value={accountName}
-                          onChange={(e) => setAccountName(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter account name"
-                          required
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label htmlFor="accountNumber" className="block mb-1">Account Number:</label>
-                        <input
-                          type="text"
-                          id="checkAccountNumber"
-                          name="checkAccountNumber"
-                          value={accountNumber}
-                          onChange={(e) => setAccountNumber(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter account number"
-                          required
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  {checkType === "facebook" && (
-                    <>
-                      <div className="mb-4">
-                        <label htmlFor="checkFacebookName" className="block mb-1">Facebook Name:</label>
-                        <input
-                          type="text"
-                          id="checkFacebookName"
-                          name="checkFacebookName"
-                          value={facebookName}
-                          onChange={(e) => setFacebookName(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter Facebook name"
-                          required
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label htmlFor="checkFacebookUrl" className="block mb-1">Facebook Profile URL:</label>
-                        <input
-                          type="url"
-                          id="checkFacebookUrl"
-                          name="checkFacebookUrl"
-                          value={facebookUrl}
-                          onChange={(e) => setFacebookUrl(e.target.value)}
-                          className="w-full p-2 bg-gray-700 rounded text-white"
-                          placeholder="Enter Facebook profile URL"
-                          required
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  {checkType !== "banking" && checkType !== "facebook" && (
-                    <div className="mb-4">
-                      <label htmlFor="checkDetail" className="block mb-1">Enter Detail:</label>
-                      <input
-                        type="text"
-                        id="checkDetail"
-                        name="checkDetail"
-                        className="w-full p-2 bg-gray-700 rounded-lg text-white text-start text-2xl h-[20vh]"
-                        placeholder="Enter the detail (e.g., phone number, eSewa ID, etc.)"
-                        required
-                      />
-                    </div>
-                  )}
+                  {renderCheckFormInputs()}
 
                   <button
                     type="submit"
-                    className="mt-4 px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition duration-300 text-white"
+                    className="mt-4 px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition-transform transform duration-300 ease-in-out hover:scale-105 text-white"
                   >
-                    Check Detail
+                    Submit Check
                   </button>
                 </form>
               </section>
@@ -302,5 +321,22 @@ const HomeForm = () => {
     </div>
   );
 };
+
+// Helper component for input fields
+const InputField = ({ label, name, value, onChange, type = "text", placeholder }) => (
+  <div className="mb-4">
+    <label htmlFor={name} className="block mb-1">{label}:</label>
+    <input
+      type={type}
+      id={name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      className="w-full p-2 bg-gray-700 rounded text-white"
+      placeholder={placeholder} // Added placeholder prop here
+      required
+    />
+  </div>
+);
 
 export default HomeForm;
