@@ -14,7 +14,7 @@ export const AppRoutes = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/blogs" element={<BlogPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<NotFoundPage />} /> {/* Catch-all route for 404 */}
+        <Route path="/*" element={<NotFoundPage />} /> {/* Catch-all route for 404 */}
       </Routes>
     </Router>
   );
