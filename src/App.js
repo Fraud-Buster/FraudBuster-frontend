@@ -1,14 +1,13 @@
 import React from 'react';
-import './App.css'
+import './App.css';
+import { AppRoutes } from './routes/AppRoutes';
 
-import { AppRoutes } from "./routes/AppRoutes";
 const App = () => {
-  return <div class='bg-[#0A0A0A]'>
-      
-      <AppRoutes/>
-  </div>
-}
+  return (
+    <div className="bg-[#0A0A0A]">
+      <AppRoutes />
+    </div>
+  );
+};
 
 export default App;
-
-
