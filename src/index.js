@@ -1,17 +1,19 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App'; // Ensure this import is correct
+import App from './App'; 
 import reportWebVitals from './reportWebVitals';
-import './index.css'; // Optional: your global styles
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'; // Router here
+import './index.css';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-        <App />
-      </BrowserRouter> {/* Rendering the App component */}
+      <App />
+    </BrowserRouter> 
   </React.StrictMode>
 );
 
-// Optional: You can include the reportWebVitals function if needed
+// Optional: Include reportWebVitals if needed
 reportWebVitals();
