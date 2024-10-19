@@ -1,15 +1,17 @@
 import React from 'react';
-import HomeForm from './home.form';
+import HomeForm from '../home/HeroSection/home.form';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 const HeroHome = () => {
-    
   return (
-    <section id="Home-Hero" class="h-[80vh] w-[100vw]">
-        <div className="flex flex-col justify-center w-[1029px] h-[185px] mx-auto mt-[75px] mb-[0px]">
-      <h1 className="text-white text-center text-5xl font-bold leading-normal">
-        Check and Report <span className="text-[#CB122A]">Frauds</span> to keep the Community Safe
-      </h1>
-    </div>
-    <HomeForm/>
+    <section id="Home-Hero" className="h-[80vh] w-full">
+      <div className="flex flex-col justify-center w-full max-w-3xl mx-auto mt-20 mb-0 p-4">
+        <h1 className="text-white text-center text-4xl md:text-5xl font-bold leading-normal">
+          Check and Report <span className="text-[#CB122A]">Frauds</span> to keep the Community Safe
+        </h1>
+      </div>
+      <HomeForm />
     </section>
   );
 };

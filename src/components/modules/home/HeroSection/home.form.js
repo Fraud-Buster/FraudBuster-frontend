@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const HomeForm = () => {
   const [isReportVisible, setIsReportVisible] = useState(false);
@@ -14,7 +14,18 @@ const HomeForm = () => {
     telegramUsername: "",
     whatsappNumber: "",
   });
-  const [checkType, setCheckType] = useState("esewa"); // Default value set to eSewa ID
+  const [descriptions, setDescriptions] = useState({
+    esewa: "",
+    phone: "",
+    banking: "",
+    telegram: "",
+    whatsapp: "",
+    facebook: ""
+  });
+  const [checkType, setCheckType] = useState("esewa");
+  const [image, setImage] = useState(null); // State to hold the uploaded image
+  
+  const fileInputRef = useRef(null); // Create a ref to access the file input
 
   const toggleSection = () => setIsReportVisible(!isReportVisible);
 
@@ -26,8 +37,34 @@ const HomeForm = () => {
     }));
   };
 
+  const handleDescriptionChange = (e) => {
+    const { value } = e.target;
+    setDescriptions((prevDescriptions) => ({
+      ...prevDescriptions,
+      [scamType]: value,
+    }));
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      // You can also preview the image or perform additional logic here
+    }
+  };
+
+  const handleUploadButtonClick = () => {
+    fileInputRef.current.click(); // Simulate a click on the hidden input
+  };
+
   const handleReportSubmit = (e) => {
     e.preventDefault();
+    const formData = {
+      ...details,
+      description: descriptions[scamType],
+      image, // Add the image file to the form data
+    };
+    console.log(formData); // Handle the form submission logic here
     alert("Report submitted!");
   };
 
@@ -223,17 +260,8 @@ const HomeForm = () => {
                       value={scamType}
                       onChange={(e) => {
                         setScamType(e.target.value);
-                        setDetails({ // Reset details when type changes
-                          accountName: "",
-                          accountNumber: "",
-                          bankName: "",
-                          facebookName: "",
-                          facebookUrl: "",
-                          scamDetail: "",
-                          esewaDetail: "",
-                          telegramUsername: "",
-                          whatsappNumber: "",
-                        });
+                        setDetails({ /* Reset details when type changes */ });
+                        setDescriptions({ /* Reset descriptions when type changes */ });
                       }}
                       className="w-full p-2 bg-gray-700 rounded text-white"
                       required
@@ -249,16 +277,32 @@ const HomeForm = () => {
 
                   {renderFormInputs()}
 
-                  <div className="mb-4">
-                    <label htmlFor="scamImage" className="block mb-1">Upload Scam Image:</label>
-                    <input
-                      type="file"
-                      id="scamImage"
-                      name="scamImage"
-                      accept="image/*"
-                      className="w-full p-2 bg-gray-700 rounded text-white"
-                    />
-                  </div>
+                  {/* Description field for the selected scam type */}
+                  <InputField
+                    label="Description"
+                    name="description"
+                    value={descriptions[scamType]}
+                    onChange={handleDescriptionChange}
+                    placeholder={`Provide a detailed description for the ${scamType} scam`}
+                  />
+
+                  {/* Hidden File Input */}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    ref={fileInputRef}
+                    style={{ display: 'none' }} // Hide the input
+                  />
+
+                  {/* Image Upload Button */}
+                  <button
+                    type="button"
+                    onClick={handleUploadButtonClick}
+                    className="mt-4 ml-2 mr-2 px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition-transform transform duration-300 ease-in-out hover:scale-105 text-white"
+                  >
+                    Add Images
+                  </button>
 
                   <button
                     type="submit"
@@ -273,24 +317,14 @@ const HomeForm = () => {
                 <h2 className="text-xl font-semibold mb-4">Check for Scams</h2>
                 <form id="checkScamForm" onSubmit={handleCheckSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="checkType" className="block mb-1">Select Check Type:</label>
+                    <label htmlFor="checkType" className="block mb-1">Select Fraud Type to Check:</label>
                     <select
                       id="checkType"
                       name="checkType"
                       value={checkType}
                       onChange={(e) => {
                         setCheckType(e.target.value);
-                        setDetails({ // Reset details when type changes
-                          accountName: "",
-                          accountNumber: "",
-                          bankName: "",
-                          facebookName: "",
-                          facebookUrl: "",
-                          scamDetail: "",
-                          esewaDetail: "",
-                          telegramUsername: "",
-                          whatsappNumber: "",
-                        });
+                        setDetails({ /* Reset details when type changes */ });
                       }}
                       className="w-full p-2 bg-gray-700 rounded text-white"
                       required
@@ -322,18 +356,18 @@ const HomeForm = () => {
   );
 };
 
-// Helper component for input fields
-const InputField = ({ label, name, value, onChange, type = "text", placeholder }) => (
+// Helper component for rendering input fields
+const InputField = ({ label, name, value, onChange, placeholder, type = "text" }) => (
   <div className="mb-4">
-    <label htmlFor={name} className="block mb-1">{label}:</label>
+    <label htmlFor={name} className="block mb-1">{label}</label>
     <input
       type={type}
       id={name}
       name={name}
       value={value}
       onChange={onChange}
+      placeholder={placeholder}
       className="w-full p-2 bg-gray-700 rounded text-white"
-      placeholder={placeholder} // Added placeholder prop here
       required
     />
   </div>
