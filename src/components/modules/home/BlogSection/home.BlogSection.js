@@ -56,14 +56,22 @@ const fetchBlogs = async () => {
 
 // Custom Previous Arrow Component
 const CustomPrevArrow = ({ className, onClick }) => (
-  <button className={`custom-arrow left-0 ${className}`} onClick={onClick}>
+  <button
+    className={`custom-arrow left-0 ${className}`}
+    onClick={onClick}
+    aria-label="Previous Blog"
+  >
     &lt; {/* or any custom icon */}
   </button>
 );
 
 // Custom Next Arrow Component
 const CustomNextArrow = ({ className, onClick }) => (
-  <button className={`custom-arrow right-0 ${className}`} onClick={onClick}>
+  <button
+    className={`custom-arrow right-0 ${className}`}
+    onClick={onClick}
+    aria-label="Next Blog"
+  >
     &gt; {/* or any custom icon */}
   </button>
 );
@@ -71,7 +79,7 @@ const CustomNextArrow = ({ className, onClick }) => (
 // Blog Card Component
 const BlogCard = ({ title, description, publishDate, tags }) => {
   return (
-    <Card className="card p-6 transition-transform duration-300 hover:shadow-2xl">
+    <Card className="card p-5 transition-transform duration-300 hover:shadow-2xl">
       <h3 className="text-3xl font-semibold text-[#CB122A] mb-2">{title}</h3>
       <small className="text-gray-400">{new Date(publishDate).toLocaleDateString()}</small>
       <p className="text-white mt-4 leading-relaxed">{description}</p>
@@ -114,6 +122,7 @@ const BlogSection = () => {
         const data = await fetchBlogs();
         setBlogs(data);
       } catch (err) {
+        console.error(err); // Log the error for debugging
         setError('Failed to load blogs. Please try again later.');
       } finally {
         setLoading(false);

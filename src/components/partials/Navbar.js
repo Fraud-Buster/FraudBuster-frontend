@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png'; // Ensure the logo image is in the correct path
+import TextAnimation from '../partials/TextAnimation'; // Import the TextAnimation component
 
 const LandingNav = () => {
-  // State to manage background color and blur effect
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for managing hamburger menu
 
@@ -23,11 +23,11 @@ const LandingNav = () => {
   }, []);
 
   const navItems = [
-    { label: "Home", path: '/' },
-    { label: "About", path: '/about' },
-    { label: "Blogs", path: '/blogs' },
-    { label: "Contact", path: '/contact' },
-    { label: "API", path: '/api' },
+    { label: <TextAnimation text="Home" />, path: '/' },
+    { label: <TextAnimation text="About" />, path: '/about' },
+    { label: <TextAnimation text="Blogs" />, path: '/blogs' },
+    { label: <TextAnimation text="Contact" />, path: '/contact' },
+    { label: <TextAnimation text="API" />, path: '/api' },
   ];
 
   return (
@@ -42,15 +42,21 @@ const LandingNav = () => {
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-white focus:outline-none"
-          aria-label="Toggle Navigation"
+          aria-label={isMenuOpen ? "Close Navigation" : "Open Navigation"}
         >
           {isMenuOpen ? (
-            <span className="block w-8 h-0.5 bg-white transform transition duration-300 rotate-45 translate-y-2" />
+            <>
+              <span className="block w-8 h-0.5 bg-white transform transition duration-300 rotate-45 translate-y-2" />
+              <span className="block w-8 h-0.5 bg-white" />
+              <span className="block w-8 h-0.5 bg-white transform transition duration-300 -rotate-45 -translate-y-2" />
+            </>
           ) : (
-            <span className="block w-8 h-0.5 bg-white transform transition duration-300 -translate-y-1" />
+            <>
+              <span className="block w-8 h-0.5 bg-white" />
+              <span className="block w-8 h-0.5 bg-white mt-1" />
+              <span className="block w-8 h-0.5 bg-white mt-1" />
+            </>
           )}
-          <span className="block w-8 h-0.5 bg-white" />
-          {isMenuOpen && <span className="block w-8 h-0.5 bg-white transform transition duration-300 -rotate-45 -translate-y-2" />}
         </button>
       </div>
 
@@ -61,7 +67,7 @@ const LandingNav = () => {
             key={index}
             to={item.path}
             className={({ isActive }) => `text-gray-400 text-lg font-medium ${isActive ? 'text-white' : 'hover:text-white'} hover:scale-110 transform transition duration-300 ease-out`}
-            aria-label={item.label}
+            aria-label={`Navigate to ${item.label.props.text}`}
           >
             {item.label}
           </NavLink>
@@ -70,13 +76,13 @@ const LandingNav = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-700 md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-gray-700 md:hidden transition-all duration-300 ease-in-out">
           {navItems.map((item, index) => (
             <NavLink
               key={index}
               to={item.path}
               className={`block text-gray-400 text-lg font-medium p-4 hover:bg-gray-800 transition duration-300`}
-              aria-label={item.label}
+              aria-label={`Navigate to ${item.label.props.text}`}
               onClick={() => setIsMenuOpen(false)} // Close menu on item click
             >
               {item.label}

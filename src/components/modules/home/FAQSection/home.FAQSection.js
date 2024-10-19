@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import TextAnimation from '../../../partials/TextAnimation';
+
 
 // Static FAQ data moved outside of the component for optimization
 const faqData = [
@@ -38,8 +40,9 @@ const FAQSection = () => {
         width: '100vw'    // Full width of the viewport for centering
       }} 
     >
-      <h1 className="font-inter font-bold text-4xl text-white text-center">
-        Frequently Asked Questions (FAQ)
+      <h1 className="font-inter font-bold text-2xl text-white text-center ">
+        <TextAnimation text="Frequently Asked Questions"/>
+        <span className="inline-block">(FAQ)</span>
       </h1>
       <h3 className="font-inter font-normal text-2xl my-2 mb-8 text-center text-white">
         Find answers to common queries about Fraudbuster.xyz and how to make the most of our services.
