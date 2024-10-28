@@ -51,7 +51,7 @@ const SearchInstructions = React.forwardRef((props, ref) => {
 const InsightsHeading = React.forwardRef((props, ref) => (
   <div
     ref={ref}
-    className={`text-white font-inter text-lg leading-[1.2] w-full md:w-[490px] text-center transition-transform duration-500 mb-28 ${props.visibility ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+    className={`text-white font-inter text-lg leading-[1.2] w-full md:w-[490px] text-center mb-28 ${props.visibility ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
     aria-label="Insights Heading"
   >
     <h2 className="text-5xl font-extrabold leading-tight">

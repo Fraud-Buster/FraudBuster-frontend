@@ -33,8 +33,8 @@ const LandingNav = () => {
   return (
     <nav className={`max-w-[1216px] w-full py-2 px-4 flex justify-between items-center sticky top-0 z-50 mx-auto transition-all duration-300 ${isScrolled ? 'bg-gray-700 backdrop-blur-md bg-opacity-80' : 'bg-transparent'}`}>
       {/* Logo */}
-      <NavLink to='/' className='bg-[#CB122A] px-3 py-1 flex items-center'>
-        <img src={logo} alt='Fraud Buster Logo' className='w-[155px] h-[40px]' />
+      <NavLink to='/' className='flex items-center'>
+        <img src={logo} alt='Fraud Buster Logo' className='w-[178px] h-[50px]' />
       </NavLink>
 
       {/* Hamburger Menu */}
@@ -66,7 +66,7 @@ const LandingNav = () => {
           <NavLink
             key={index}
             to={item.path}
-            className={({ isActive }) => `text-gray-400 text-lg font-medium ${isActive ? 'text-white' : 'hover:text-white'} hover:scale-110 transform transition duration-300 ease-out`}
+            className={({ isActive }) => ` text-gray-400 text-lg font-medium ${isActive ? 'text-white' : 'hover:text-white'} hover:scale-110 transform transition duration-300 ease-out`}
             aria-label={`Navigate to ${item.label.props.text}`}
           >
             {item.label}
