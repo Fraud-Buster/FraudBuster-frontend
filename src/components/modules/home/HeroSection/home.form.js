@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { submitScamReport } from "../../../../services/scamService"; // Adjust the import path if necessary
+
 
 const HomeForm = () => {
   const [isReportVisible, setIsReportVisible] = useState(false);
@@ -57,16 +59,123 @@ const HomeForm = () => {
     fileInputRef.current.click(); // Simulate a click on the hidden input
   };
 
-  const handleReportSubmit = (e) => {
-    e.preventDefault();
-    const formData = {
-      ...details,
-      description: descriptions[scamType],
-      image, // Add the image file to the form data
-    };
-    console.log(formData); // Handle the form submission logic here
-    alert("Report submitted!");
+  const scamTypeMappings = {
+    BankingReport: {
+        fields: [
+            { key: 'account_name', sourceKey: 'accountName' },
+            { key: 'account_number', sourceKey: 'accountNumber' },
+            { key: 'bank_name', sourceKey: 'bankName' },
+            { key: 'description', sourceKey: 'description' },
+            { key: 'image_url', sourceKey: 'image' }, // Assuming image is stored as 'image' in the frontend
+        ],
+    },
+    EsewaReport: {
+        fields: [
+            { key: 'esewa_number', sourceKey: 'esewaNumber' },
+            { key: 'description', sourceKey: 'description' },
+            { key: 'image_url', sourceKey: 'image' },
+        ],
+    },
+    PhoneReport: {
+        fields: [
+            { key: 'phone_number', sourceKey: 'phoneNumber' },
+            { key: 'description', sourceKey: 'description' },
+            { key: 'image_url', sourceKey: 'image' },
+        ],
+    },
+    SocialMediaReport: {
+        fields: [
+            { key: 'name', sourceKey: 'name' },
+            { key: 'URL', sourceKey: 'url' }, // Assuming 'url' is used in the frontend
+            { key: 'description', sourceKey: 'description' },
+            { key: 'image_url', sourceKey: 'image' },
+        ],
+    },
+    TelegramReport: {
+        fields: [
+            { key: 'phone_number', sourceKey: 'phoneNumber' },
+            { key: 'description', sourceKey: 'description' },
+            { key: 'image_url', sourceKey: 'image' },
+        ],
+    },
+    WhatsAppReport: {
+        fields: [
+            { key: 'phone_number', sourceKey: 'phoneNumber' },
+            { key: 'description', sourceKey: 'description' },
+            { key: 'image_url', sourceKey: 'image' },
+        ],
+    },
+};
+
+  const handleReportSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Create a FormData object to hold the input data
+    const formData = new FormData();
+
+    // Determine the report type and get the corresponding fields
+    const reportType = scamTypeMappings[scamType];
+    if (!reportType) {
+      alert("Invalid scam type selected.");
+      return;
+    }
+
+    // Prepare the data to match the expected backend structure
+    const structuredData = {};
+    reportType.fields.forEach(({ key, sourceKey }) => {
+      if (sourceKey === "description") {
+        structuredData[key] = descriptions[scamType];
+      } else if (sourceKey === "image") {
+        if (image) {
+          formData.append(key, image); // Add the image file
+        }
+      } else {
+        structuredData[key] = details[sourceKey];
+      }
+    });
+
+    // Append the structured data to FormData
+    for (const key in structuredData) {
+      if (structuredData[key]) { // Only append non-empty values
+        formData.append(key, structuredData[key]);
+      }
+    }
+
+    try {
+      // Use the service function to submit the report
+      const response = await submitScamReport(formData);
+
+      console.log(response.data); // Log the response for debugging
+      alert("Report submitted successfully!"); // Notify the user
+
+      // Reset form fields after submission
+      setDetails({
+        accountName: "",
+        accountNumber: "",
+        bankName: "",
+        facebookName: "",
+        facebookUrl: "",
+        scamDetail: "",
+        esewaDetail: "",
+        telegramUsername: "",
+        whatsappNumber: "",
+      });
+      setDescriptions({
+        esewa: "",
+        phone: "",
+        banking: "",
+        telegram: "",
+        whatsapp: "",
+        facebook: ""
+      });
+      setImage(null); // Reset the image state
+    } catch (error) {
+      console.error("Error submitting the report:", error);
+      alert("There was an error submitting the report. Please try again."); // Notify user of the error
+    }
   };
+
+    // ... rest of the component code
 
   const handleCheckSubmit = (e) => {
     e.preventDefault();
