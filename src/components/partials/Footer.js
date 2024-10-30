@@ -4,7 +4,7 @@ import { FaEnvelope, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'reac
 
 const Footer = () => {
     return (
-        <footer className="bg-[#CB122A] w-[80vw] pt-5 mx-auto">
+        <footer className="bg-[#CB122A] max-w-[1216px] w-full pt-5 mx-auto">
             {/* Main Footer Content */}
             <div className="flex flex-col lg:flex-row justify-between items-start px-5 lg:px-20">
                 {/* Logo and Description */}
@@ -26,8 +26,6 @@ const Footer = () => {
                         <a href="#contact" className="text-white hover:underline">Contact Us</a>
                     </div>
                 </div>
-
-
 
                 {/* Contact and Social Links */}
                 <div className="flex flex-col items-start text-left">
@@ -54,7 +52,7 @@ const Footer = () => {
             </div>
 
             {/* Subfooter */}
-            <div className="bg-[#0A0A0B]  text-white text-center py-4 mt-5">
+            <div className="bg-[#0A0A0B] text-white text-center py-4 mt-5">
                 <p>© 2024 Fraud Buster | All Rights Reserved</p>
             </div>
         </footer>
