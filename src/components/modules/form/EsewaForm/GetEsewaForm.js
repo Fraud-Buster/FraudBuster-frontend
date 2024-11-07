@@ -1,45 +1,45 @@
 import React, { useState } from 'react';
 import FormContainer from '../../../partials/form/FormContainer.js';
-import InputField from '../../../partials/form/InputField'; // Corrected path
-import SubmitButton from '../../../partials/form/SubmitButton'; // Corrected path
-import useBankingForm from './hooks/useBankingForm.js';
-import { getBankingReports } from './services/bankingService.js';
+import InputField from '../../../partials/form/InputField';
+import SubmitButton from '../../../partials/form/SubmitButton';
+import useEsewaForm from './hooks/useEsewaForm.js';
+import { getEsewaReports } from './services/esewaService.js';
 
-const GetBankingForm = () => {
+const GetEsewaForm = () => {
   const {
     details,
     handleChange,
     resetForm,
-  } = useBankingForm();
+  } = useEsewaForm();
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (!details.accountName || !details.accountNumber || !details.bankName) {
-      setError("All fields must be filled out.");
+
+    // Validate that esewa_number is filled out
+    if (!details.esewa_number) {
+      setError("Esewa Number is required.");
       return;
     }
-  
-    if (isNaN(details.accountNumber)) {
-      setError("Account Number must be a valid number.");
+
+    // Check that eSewa number is numeric
+    if (isNaN(details.esewa_number)) {
+      setError("Esewa Number must be a valid number.");
       return;
     }
-  
+
     const formData = {
-      account_name: details.accountName,
-      account_number: details.accountNumber,
-      bank_name: details.bankName,
+      esewa_number: details.esewa_number,
     };
-  
+
     setError("");
     setIsLoading(true);
-  
+
     try {
-      const validationResponse = await getBankingReports(formData);
-  
+      const validationResponse = await getEsewaReports(formData);
+
       if (validationResponse?.success) {
         alert("Report found in the database.");
         resetForm();
@@ -61,32 +61,18 @@ const GetBankingForm = () => {
   return (
     <FormContainer>
       <section>
-        <h2 className="text-xl font-semibold mb-4">Check Banking Scam</h2>
+        <h2 className="text-xl font-semibold mb-4">Check eSewa Scam</h2>
 
         {error && <div className="text-red-500 mb-4">{error}</div>}
         {isLoading && <div className="text-blue-500 mb-4">Validating...</div>}
 
         <form onSubmit={handleSubmit}>
           <InputField
-            label="Account Name"
-            name="accountName"
-            value={details.accountName}
+            label="Esewa Number"
+            name="esewa_number"
+            value={details.esewa_number}
             onChange={handleChange}
-            placeholder="Enter account name"
-          />
-          <InputField
-            label="Account Number"
-            name="accountNumber"
-            value={details.accountNumber}
-            onChange={handleChange}
-            placeholder="Enter account number"
-          />
-          <InputField
-            label="Bank Name"
-            name="bankName"
-            value={details.bankName}
-            onChange={handleChange}
-            placeholder="Enter bank name"
+            placeholder="Enter eSewa number"
           />
           <SubmitButton>Check Report</SubmitButton>
         </form>
@@ -95,4 +81,4 @@ const GetBankingForm = () => {
   );
 };
 
-export default GetBankingForm;
+export default GetEsewaForm;

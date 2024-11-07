@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const NepalScamLists = () => {
     const scamTypes = ["Phone number", "Bank", "Esewa", "Khalti", "IME PAY", "Scam Type 6", "Scam Type 7", "Scam Type 8"];
 
