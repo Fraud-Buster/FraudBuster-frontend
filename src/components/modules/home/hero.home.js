@@ -1,9 +1,8 @@
 import React from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import BankingForm from '../form/BankingForm';
-import NepalScamLists from '../form/lists/nepalScamLists';
-import GetBankingForm from '../form/BankingForm/GetBankingForm';
+import NepalScamLists from '../countryWiseLists/nepal.scamlist';
+
 
 const HeroHome = () => {
   return (
@@ -17,8 +16,6 @@ const HeroHome = () => {
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-8">
         <NepalScamLists />
-        <BankingForm />
-        <GetBankingForm />
       </div>
       
     </section>
