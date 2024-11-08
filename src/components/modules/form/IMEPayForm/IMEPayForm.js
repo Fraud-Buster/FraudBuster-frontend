@@ -1,31 +1,31 @@
 import React from 'react';
 import FormContainer from '../../../partials/form/FormContainer.js';
-import InputField from '../../../partials/form/InputField';
-import SubmitButton from '../../../partials/form/SubmitButton';
-import useEsewaForm from './hooks/useEsewaForm.js';
-import { submitEsewaReport } from './services/esewaService.js';
+import InputField from '../../../partials/form/InputField.js';
+import SubmitButton from '../../../partials/form/SubmitButton.js';
+import useIMEPayForm from './hooks/useIMEPayForm.js'; // Updated to IMEPay
+import { submitIMEPayReport } from './services/IMEPayService.js'; // Updated to IMEPay service
 
-const EsewaForm = () => {
+const IMEPayForm = () => {
   const {
     details,
     description,
     handleChange,
     handleDescriptionChange,
     resetForm,
-  } = useEsewaForm();
+  } = useIMEPayForm(); // Updated to IMEPay
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formData = {
-      esewa_number: details.esewa_number,
+      imepay_number: details.imepay_number, // Updated field name
       description: description,
     };
-  
+
     console.log("Form Data:", formData);
-  
+
     try {
-      await submitEsewaReport(formData);
+      await submitIMEPayReport(formData); // Updated to IMEPay report submission
       alert("Report submitted successfully!");
       resetForm();
     } catch (error) {
@@ -36,22 +36,22 @@ const EsewaForm = () => {
 
   return (
     <FormContainer>
-      <section className=" rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-white">Report Esewa Scam</h2>
+      <section className="rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-4 text-white">Report IMEPay Scam</h2>
         <form onSubmit={handleSubmit}>
           <InputField
-            label="Esewa Number"
-            name="esewa_number"
-            value={details.esewa_number}
+            label="IMEPay Number" // Updated label
+            name="imepay_number" // Updated name
+            value={details.imepay_number} // Updated field
             onChange={handleChange}
-            placeholder="Enter Esewa number"
+            placeholder="Enter IMEPay number" // Updated placeholder
           />
           <InputField
             label="Description"
             name="description"
             value={description}
             onChange={handleDescriptionChange}
-            placeholder="Provide a detailed description of the Esewa scam"
+            placeholder="Provide a detailed description of the IMEPay scam"
           />
           <SubmitButton>Submit Report</SubmitButton>
         </form>
@@ -60,4 +60,4 @@ const EsewaForm = () => {
   );
 };
 
-export default EsewaForm;
+export default IMEPayForm;

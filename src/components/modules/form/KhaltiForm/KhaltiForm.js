@@ -1,31 +1,31 @@
 import React from 'react';
 import FormContainer from '../../../partials/form/FormContainer.js';
-import InputField from '../../../partials/form/InputField';
-import SubmitButton from '../../../partials/form/SubmitButton';
-import useEsewaForm from './hooks/useEsewaForm.js';
-import { submitEsewaReport } from './services/esewaService.js';
+import InputField from '../../../partials/form/InputField.js';
+import SubmitButton from '../../../partials/form/SubmitButton.js';
+import useKhaltiForm from './hooks/useKhaltiForm.js';
+import { submitKhaltiReport } from './services/khaltiService.js';
 
-const EsewaForm = () => {
+const KhaltiForm = () => {
   const {
     details,
     description,
     handleChange,
     handleDescriptionChange,
     resetForm,
-  } = useEsewaForm();
+  } = useKhaltiForm();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formData = {
-      esewa_number: details.esewa_number,
+      khalti_number: details.khalti_number,
       description: description,
     };
-  
+
     console.log("Form Data:", formData);
-  
+
     try {
-      await submitEsewaReport(formData);
+      await submitKhaltiReport(formData);
       alert("Report submitted successfully!");
       resetForm();
     } catch (error) {
@@ -36,22 +36,22 @@ const EsewaForm = () => {
 
   return (
     <FormContainer>
-      <section className=" rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-white">Report Esewa Scam</h2>
+      <section className="rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-4 text-white">Report Khalti Scam</h2>
         <form onSubmit={handleSubmit}>
           <InputField
-            label="Esewa Number"
-            name="esewa_number"
-            value={details.esewa_number}
+            label="Khalti Number"
+            name="khalti_number"
+            value={details.khalti_number}
             onChange={handleChange}
-            placeholder="Enter Esewa number"
+            placeholder="Enter Khalti number"
           />
           <InputField
             label="Description"
             name="description"
             value={description}
             onChange={handleDescriptionChange}
-            placeholder="Provide a detailed description of the Esewa scam"
+            placeholder="Provide a detailed description of the Khalti scam"
           />
           <SubmitButton>Submit Report</SubmitButton>
         </form>
@@ -60,4 +60,4 @@ const EsewaForm = () => {
   );
 };
 
-export default EsewaForm;
+export default KhaltiForm;
