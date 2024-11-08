@@ -2,30 +2,30 @@ import React from 'react';
 import FormContainer from '../../../partials/form/FormContainer.js';
 import InputField from '../../../partials/form/InputField';
 import SubmitButton from '../../../partials/form/SubmitButton';
-import useEsewaForm from './hooks/useEsewaForm.js';
-import { submitEsewaReport } from './services/esewaService.js';
+import usePhoneNumberForm from './hooks/usePhoneNumberForm.js';
+import { submitPhoneNumberReport } from './services/phoneNumberService.js';
 
-const EsewaForm = () => {
+const PhoneNumberForm = () => {
   const {
     details,
     description,
     handleChange,
     handleDescriptionChange,
     resetForm,
-  } = useEsewaForm();
+  } = usePhoneNumberForm();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     const formData = {
-      esewa_number: details.esewa_number,
+      phone_number: details.phone_number,
       description: description,
     };
   
     console.log("Form Data:", formData);
   
     try {
-      await submitEsewaReport(formData);
+      await submitPhoneNumberReport(formData);
       alert("Report submitted successfully!");
       resetForm();
     } catch (error) {
@@ -37,21 +37,21 @@ const EsewaForm = () => {
   return (
     <FormContainer>
       <section className=" rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-white">Report Esewa Scam</h2>
+        <h2 className="text-xl font-semibold mb-4 text-white">Report Phone Number Scam</h2>
         <form onSubmit={handleSubmit}>
           <InputField
-            label="Esewa Number"
-            name="esewa_number"
-            value={details.esewa_number}
+            label="Phone Number"
+            name="phone_number"
+            value={details.phone_number}
             onChange={handleChange}
-            placeholder="Enter Esewa number"
+            placeholder="Enter Phone number"
           />
           <InputField
             label="Description"
             name="description"
             value={description}
             onChange={handleDescriptionChange}
-            placeholder="Provide a detailed description of the Esewa scam"
+            placeholder="Provide a detailed description of the PHONE scam"
           />
           <SubmitButton>Submit Report</SubmitButton>
         </form>
@@ -60,4 +60,4 @@ const EsewaForm = () => {
   );
 };
 
-export default EsewaForm;
+export default PhoneNumberForm;
