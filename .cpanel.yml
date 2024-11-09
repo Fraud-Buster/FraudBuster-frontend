@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/fraudbus/public_html/FB-frontend/
+    - export DEPLOYPATH=/home/fraudbus/public_html/FB-Frontend/
     - cd /home/fraudbus/public_html/FB-frontend
-    - npm install # Install dependencies
-    - npm run build # Build the React app
-    - /bin/cp -R build/* $DEPLOYPATH # Copy the build output to the public directory
+    - /opt/cpanel/ea-nodejs16/bin/npm install # Install dependencies (adjust path if needed)
+    - /opt/cpanel/ea-nodejs16/bin/npm run build # Build the React app
+    - rsync -a build/ $DEPLOYPATH # Copy the build output to the public directory
