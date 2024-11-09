@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/fraudbus/public_html/FB-frontend/
+    - cd /home/fraudbus/public_html/FB-frontend
+    - npm install # Install dependencies
+    - npm run build # Build the React app
+    - /bin/cp -R build/* $DEPLOYPATH # Copy the build output to the public directory
