@@ -1,10 +1,15 @@
-const SubmitButton = ({ children }) => (
-    <button
-      type="submit"
-      className="mt-4 px-6 py-3 bg-red-600 rounded-md hover:bg-red-500 transition-transform transform duration-300 ease-in-out hover:scale-105 text-white"
-    >
-      {children}
-    </button>
-  );
+const SubmitButton = ({ children, disabled = false }) => (
+  <button
+    type="submit"
+    disabled={disabled}
+    className={`mt-2 px-4 py-2 rounded-md text-white transition-transform transform duration-300 ease-in-out ${
+      disabled
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#CB122A] hover:bg-[#CB122A] hover:scale-105 focus:ring-4 focus:ring-[#CB122A] focus:outline-none"
+    }`}
+  >
+    {children}
+  </button>
+);
 
-  export default SubmitButton;
+export default SubmitButton;
