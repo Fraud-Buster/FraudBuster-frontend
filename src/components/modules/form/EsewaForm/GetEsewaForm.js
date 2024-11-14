@@ -61,7 +61,7 @@ const GetEsewaForm = () => {
   return (
     <FormContainer>
       <section>
-        <h2 className="text-xl font-semibold mb-4">Check eSewa Scam</h2>
+        <h2 className="text-xl font-semibold mb-4">Check Esewa Scam</h2>
 
         {error && <div className="text-red-500 mb-4">{error}</div>}
         {isLoading && <div className="text-blue-500 mb-4">Validating...</div>}

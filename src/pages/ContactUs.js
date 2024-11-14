@@ -7,7 +7,7 @@ export const ContactPage = () => {
   return (
     <main>
       <LandingNav />
-      <Contact /> {/* Use capital 'About' here */}
+      <Contact />
       <Footer />
     </main>
   );

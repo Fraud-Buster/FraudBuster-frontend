@@ -11,13 +11,13 @@ import IMEPayForm from "../form/IMEPayForm"; // Import for IMEPay reporting
 import GetIMEPayForm from "../form/IMEPayForm/GetIMEPayForm"; // Import for IMEPay checking
 
 const NepalScamLists = () => {
-  const scamTypes = ["Esewa", "Bank", "Khalti", "IMEPay","Phone Number"];
+  const scamTypes = ["Esewa", "Bank", "Khalti", "IMEPay", "Phone Number"];
   const [selectedScam, setSelectedScam] = useState("Esewa");
   const [formType, setFormType] = useState("check");
 
   const handleItemClick = (scamType) => {
     setSelectedScam(scamType);
-    setFormType("check"); 
+    setFormType("check");
   };
 
   const toggleFormType = () => {
@@ -40,8 +40,8 @@ const NepalScamLists = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center align-center">
-      <div className="flex justify-center items-center mb-6">
+    <div className="p-2">
+      <div className="mb-4 text-center">
         <button
           onClick={toggleFormType}
           className={`px-4 py-2 rounded-md transition-colors duration-300 ${
@@ -51,9 +51,10 @@ const NepalScamLists = () => {
           {formType === "check" ? "Report Scam" : "Check Scam"}
         </button>
       </div>
-      <section className="flex h-screen">
+
+      <section className="flex gap-6">
         {/* Navigation bar */}
-        <div className="text-white p-6 flex flex-col gap-4 w-64 h-[50vh] rounded-md">
+        <div className="text-white p-2 flex flex-col gap-2 w-60 rounded-md">
           {scamTypes.map((scam, index) => (
             <div
               key={index}
@@ -66,8 +67,9 @@ const NepalScamLists = () => {
             </div>
           ))}
         </div>
-        {/* Main content area */}
-        <div className="flex space-y-4">
+
+        {/* Main content area with red border */}
+        <div className="flex flex-col gap-2 w-full p-4 border-1 border-[#CB122A] rounded-md">
           {renderForm()}
         </div>
       </section>
