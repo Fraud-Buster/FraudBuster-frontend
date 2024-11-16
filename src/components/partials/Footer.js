@@ -52,7 +52,7 @@ const Footer = () => {
             </div>
 
             {/* Subfooter */}
-            <div className="bg-[#0A0A0B] text-white text-center py-4 mt-5">
+            <div className="bg-[#0A0A0A] text-white text-center py-4 mt-5">
                 <p>© 2024 Fraud Buster | All Rights Reserved</p>
             </div>
         </footer>

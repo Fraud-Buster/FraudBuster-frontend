@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../assets/logo.png'; // Ensure the logo image is in the correct path
-import TextAnimation from '../partials/TextAnimation'; // Import the TextAnimation component
+import logo from '../../assets/logo.png';
+import TextAnimation from '../partials/TextAnimation';
 
 const LandingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for managing hamburger menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Effect to handle scroll events
   useEffect(() => {
@@ -23,11 +23,11 @@ const LandingNav = () => {
   }, []);
 
   const navItems = [
-    { label: <TextAnimation text="Home" />, path: '/' },
-    { label: <TextAnimation text="About" />, path: '/about' },
-    { label: <TextAnimation text="Blogs" />, path: '/blogs' },
-    { label: <TextAnimation text="Contact" />, path: '/contact' },
-    { label: <TextAnimation text="API" />, path: '/api' },
+    { label: "Home", path: '/' },
+    { label: "About", path: '/about' },
+    { label: "Blogs", path: '/blogs' },
+    { label: "Contact", path: '/contact' },
+    { label: "API", path: '/api' },
   ];
 
   return (
@@ -66,10 +66,14 @@ const LandingNav = () => {
           <NavLink
             key={index}
             to={item.path}
-            className={({ isActive }) => ` text-gray-400 text-lg font-medium ${isActive ? 'text-white' : 'hover:text-white'} hover:scale-110 transform transition duration-300 ease-out`}
-            aria-label={`Navigate to ${item.label.props.text}`}
+            className={({ isActive }) => `text-gray-400 text-lg font-medium ${isActive ? 'text-white' : 'hover:text-white'} hover:scale-110 transform transition duration-300 ease-out`}
+            aria-label={`Navigate to ${item.label}`}
           >
-            {item.label}
+            {item.label === "Home" ? (
+              <TextAnimation text={item.label} />
+            ) : (
+              item.label 
+            )}
           </NavLink>
         ))}
       </div>
@@ -82,10 +86,14 @@ const LandingNav = () => {
               key={index}
               to={item.path}
               className={`block text-gray-400 text-lg font-medium p-4 hover:bg-gray-800 transition duration-300`}
-              aria-label={`Navigate to ${item.label.props.text}`}
-              onClick={() => setIsMenuOpen(false)} // Close menu on item click
+              aria-label={`Navigate to ${item.label}`}
+              onClick={() => setIsMenuOpen(false)} 
             >
-              {item.label}
+              {item.label === "Home" ? (
+                <TextAnimation text={item.label} />
+              ) : (
+                item.label
+              )}
             </NavLink>
           ))}
         </div>
