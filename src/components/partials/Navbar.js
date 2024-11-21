@@ -25,7 +25,7 @@ const LandingNav = () => {
   const navItems = [
     { label: "Home", path: '/' },
     { label: "About", path: '/about' },
-    { label: "Blogs", path: '/blogs' },
+    { label: "Blogs", path: 'https://blogs.fraudbuster.xyz' },
     { label: "Contact", path: '/contact' },
     { label: "API", path: '/api' },
   ];
