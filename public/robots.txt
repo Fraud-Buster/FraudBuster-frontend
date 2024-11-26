@@ -3,5 +3,4 @@ User-agent: *
 Disallow: /private/
 Allow: /
 
-Sitemap: https://www.example.com/sitemap.xml
-Crawl-delay: 10
+Sitemap: https://fraudbuster.xyz/sitemap.xml
